@@ -32,7 +32,7 @@ impl TelemetryClient {
     }
 
     /// Creates a new telemetry client with custom telemetry channel.
-    pub(crate) fn create<C: TelemetryChannel + 'static>(config: &TelemetryConfig, channel: C) -> Self {
+    pub(crate) fn create<C: TelemetryChannel + 'static + Send + Sync>(config: &TelemetryConfig, channel: C) -> Self {
         Self {
             enabled: true,
             context: TelemetryContext::from_config(config),
